@@ -18,4 +18,12 @@ export class Position {
     @Column()
     @Field(type => String, { nullable: true, description: "招聘条件" })
     condition: string;
+
+    @Column()
+    @Field(type => Date, { nullable: true, description: "创建时间" })
+    created_at: Date;
+
+    @Column()
+    @Field(type => Date, { nullable: true, description: "修改时间" })
+    updated_at: Date;
 }

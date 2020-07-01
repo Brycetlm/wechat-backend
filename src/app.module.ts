@@ -8,6 +8,7 @@ import { CompanyModule } from './company/company.module';
 import { PositionModule } from './position/position.module';
 import { PositionTagModule } from './position-tag/position-tag.module';
 import { ResumeModule } from './resume/resume.module';
+import { ApplyModule } from './apply/apply.module';
 import { GraphQLModule } from '@nestjs/graphql';
 
 @Module({
@@ -41,7 +42,8 @@ import { GraphQLModule } from '@nestjs/graphql';
     CompanyModule,
     PositionModule,
     PositionTagModule,
-    ResumeModule
+    ResumeModule,
+    ApplyModule
   ],
   controllers: [AppController],
   providers: [AppService],

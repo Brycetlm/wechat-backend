@@ -1,18 +1,6 @@
 import { PrimaryGeneratedColumn, Column, Entity } from "typeorm";
 import { Field, ID, ObjectType, Int, registerEnumType, Float } from 'type-graphql';
 
-export enum ResumeState {
-    POST = 0,       // 投递
-    REVISION = 1,   // 审核
-    ACCEPT = 2,     // 接收
-    REJECT = 3      // 拒绝
-}
-
-registerEnumType(ResumeState, {
-    name: 'ResumeState',
-    description: '简历投递状态'
-})
-
 export enum ResumePermission {
     PUBLIC = 0,     // 公开
     PRIVATE = 1     // 私有
@@ -58,14 +46,18 @@ export class Resume {
     region: string;
 
     @Column()
-    @Field(type => ResumeState, { nullable: true, description: "简历状态" })
-    state: ResumeState;
-
-    @Column()
     @Field(type => ResumePermission, { nullable: true, description: "简历权限" })
     permission: ResumePermission;
 
     @Column()
     @Field(type => Int, { nullable: true, description: "工作经验（年）" })
     exp: number;
+
+    @Column()
+    @Field(type => Date, { nullable: true, description: "创建时间" })
+    created_at: Date;
+
+    @Column()
+    @Field(type => Date, { nullable: true, description: "更新时间" })
+    updated_at: Date;
 }
