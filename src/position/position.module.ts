@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Position } from './position.entity';
-import { PositionService } from './Position.service';
-import { PositionResolver } from './Position.resolver';
+import { PositionService } from './position.service';
+import { PositionResolver } from './position.resolver';
 
 @Module({
     imports: [TypeOrmModule.forFeature([Position])],

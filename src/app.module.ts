@@ -5,6 +5,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { CatsModule } from './cats/cats.module';
 import { UserModule } from './user/user.module';
 import { CompanyModule } from './company/company.module';
+import { PositionModule } from './position/position.module';
+import { PositionTagModule } from './position-tag/position-tag.module';
 import { GraphQLModule } from '@nestjs/graphql';
 
 @Module({
@@ -36,6 +38,8 @@ import { GraphQLModule } from '@nestjs/graphql';
     CatsModule,
     UserModule,
     CompanyModule,
+    PositionModule,
+    PositionTagModule
   ],
   controllers: [AppController],
   providers: [AppService],
