@@ -3,6 +3,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CatsModule } from './cats/cats.module';
+import { UserModule } from './user/user.module';
+import { CompanyModule } from './company/company.module';
 import { GraphQLModule } from '@nestjs/graphql';
 
 @Module({
@@ -32,6 +34,8 @@ import { GraphQLModule } from '@nestjs/graphql';
       synchronize: true,
     }),
     CatsModule,
+    UserModule,
+    CompanyModule,
   ],
   controllers: [AppController],
   providers: [AppService],
