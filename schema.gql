@@ -55,6 +55,9 @@ type PositionEntity {
   """招聘条件"""
   condition: String
 
+  """tag 列表"""
+  tags: [String!]
+
   """创建时间"""
   created_at: DateTime
 

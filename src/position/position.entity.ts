@@ -20,6 +20,9 @@ export class PositionEntity {
     @Field(type => String, { nullable: true, description: "招聘条件" })
     condition: string;
 
+    @Field(type => [String], { nullable: true, description: "tag 列表" })
+    tags: string[];
+
     @Field(type => Date, { nullable: true, description: "创建时间" })
     created_at: Date;
 

@@ -10,4 +10,7 @@ export class PositionTagService {
         private readonly positionTagRepository: Repository<PositionTag>
     ) { }
 
+    async getTagsById(positionId: number) {
+        return await this.positionTagRepository.find({ position_id: positionId });
+    }
 }
