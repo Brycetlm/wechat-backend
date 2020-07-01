@@ -2,10 +2,81 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type CompanyEntity {
+  """公司的 ID"""
+  id: Int!
+
+  """名称"""
+  name: String
+
+  """公司简介"""
+  profile: String
+
+  """省"""
+  province: String
+
+  """市"""
+  city: String
+
+  """区"""
+  region: String
+
+  """注册资本"""
+  assets: String
+
+  """注册日期"""
+  birthday: DateTime
+
+  """电话"""
+  phone: String
+
+  """公司 LOGO 的 URL"""
+  logo_url: String
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type PositionEntity {
+  """职位 ID"""
+  id: Int!
+
+  """公司 ID"""
+  company_id: Int!
+
+  """职位名"""
+  name: String!
+
+  """职位简介"""
+  profile: String
+
+  """招聘条件"""
+  condition: String
+
+  """创建时间"""
+  created_at: DateTime
+
+  """修改时间"""
+  updated_at: DateTime
+}
+
+type PositionSearchData {
+  """返回的职位实体列表"""
+  list: [PositionEntity!]
+}
+
 type Query {
   """获取数据库中的名字（demo 测试用）"""
   getName(
     """数据库中的ID（测试用）"""
     id: Int!
   ): String
+
+  """使用 ID 获取公司信息"""
+  getCompanyInfoById(companyId: Int!): CompanyEntity!
+
+  """获取默认职位列表"""
+  getDefaultPositions: PositionSearchData!
 }

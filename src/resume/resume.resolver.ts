@@ -5,7 +5,7 @@ import { ResumeService } from "./resume.service";
 @Resolver('Resume')
 export class ResumeResolver {
     constructor(
-        resumeService: ResumeService
+        private resumeService: ResumeService
     ) { }
 
 }

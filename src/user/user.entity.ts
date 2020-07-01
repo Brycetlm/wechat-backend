@@ -1,5 +1,5 @@
 import { PrimaryGeneratedColumn, Column, Entity } from "typeorm";
-import { Field, ID, ObjectType, Int, registerEnumType, Float } from 'type-graphql';
+import { Field, ID, ObjectType, Int, registerEnumType, Float } from '@nestjs/graphql';
 
 export enum Education {
     MIDDLE_SCHOOL = 0,      // 初中
@@ -49,4 +49,16 @@ export class User {
     @Column()
     @Field(type => String, { nullable: true, description: "区" })
     region: string;
+
+    @Column()
+    @Field(type => String, { nullable: true, description: "头像 URL" })
+    avatar_url: string;
+
+    @Column()
+    @Field(type => String, { nullable: true, description: "电子邮箱" })
+    email: string;
+
+    @Column()
+    @Field(type => String, { nullable: true, description: "手机号" })
+    phone: string;
 }

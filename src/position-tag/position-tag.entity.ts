@@ -1,5 +1,5 @@
 import { PrimaryGeneratedColumn, Column, Entity } from "typeorm";
-import { Field, ID, ObjectType, Int, registerEnumType, Float } from 'type-graphql';
+import { Field, ID, ObjectType, Int, registerEnumType, Float } from '@nestjs/graphql';
 
 @Entity()
 export class PositionTag {

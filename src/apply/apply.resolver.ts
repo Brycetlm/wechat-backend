@@ -5,7 +5,7 @@ import { ApplyService } from "./apply.service";
 @Resolver('Apply')
 export class ApplyResolver {
     constructor(
-        applyService: ApplyService
+        private applyService: ApplyService
     ) { }
 
 }

@@ -5,7 +5,7 @@ import { PositionTagService } from "./position-tag.service";
 @Resolver('PositionTag')
 export class PositionTagResolver {
     constructor(
-        positionTagService: PositionTagService
+        private positionTagService: PositionTagService
     ) { }
 
 }
