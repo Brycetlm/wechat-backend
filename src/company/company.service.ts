@@ -13,5 +13,4 @@ export class CompanyService {
     async getCompanyInfoById(companyId: number): Promise<CompanyEntity> {
         return await this.companyRepository.findOne({ id: companyId });
     }
-
 }

@@ -16,6 +16,53 @@ registerEnumType(Education, {
     description: '学历'
 })
 
+@ObjectType()
+export class UserEntity {
+    @PrimaryGeneratedColumn()
+    @Field(type => Int, { nullable: false, description: "用户的 ID" })
+    id: number;
+
+    @Column()
+    @Field(type => String, { nullable: false, description: "微信平台提供的 openid" })
+    openid: string;
+
+    @Column()
+    @Field(type => String, { nullable: true, description: "姓名" })
+    name: string;
+
+    @Column()
+    @Field(type => Date, { nullable: true, description: "生日" })
+    birthday: Date;
+
+    @Column()
+    @Field(type => Education, { nullable: true, description: "学历" })
+    education: Education;
+
+    @Column()
+    @Field(type => String, { nullable: true, description: "省" })
+    province: string;
+
+    @Column()
+    @Field(type => String, { nullable: true, description: "市" })
+    city: string;
+
+    @Column()
+    @Field(type => String, { nullable: true, description: "区" })
+    region: string;
+
+    @Column()
+    @Field(type => String, { nullable: true, description: "头像 URL" })
+    avatar_url: string;
+
+    @Column()
+    @Field(type => String, { nullable: true, description: "电子邮箱" })
+    email: string;
+
+    @Column()
+    @Field(type => String, { nullable: true, description: "手机号" })
+    phone: string;
+}
+
 @Entity()
 export class User {
     @PrimaryGeneratedColumn()

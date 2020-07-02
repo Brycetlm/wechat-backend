@@ -2,6 +2,56 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type UserEntity {
+  """用户的 ID"""
+  id: Int!
+
+  """微信平台提供的 openid"""
+  openid: String!
+
+  """姓名"""
+  name: String
+
+  """生日"""
+  birthday: DateTime
+
+  """学历"""
+  education: Education
+
+  """省"""
+  province: String
+
+  """市"""
+  city: String
+
+  """区"""
+  region: String
+
+  """头像 URL"""
+  avatar_url: String
+
+  """电子邮箱"""
+  email: String
+
+  """手机号"""
+  phone: String
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+"""学历"""
+enum Education {
+  MIDDLE_SCHOOL
+  HIGH_SCHOOL
+  UNDERGRADUATE
+  COLLEGE
+  MASTER
+  DOCTOR
+}
+
 type CompanyEntity {
   """公司的 ID"""
   id: Int!
@@ -34,11 +84,6 @@ type CompanyEntity {
   logo_url: String
 }
 
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
-
 type PositionEntity {
   """职位 ID"""
   id: Int!
@@ -70,6 +115,81 @@ type PositionSearchData {
   list: [PositionEntity!]
 }
 
+type ResumeEntity {
+  """ID"""
+  id: Int!
+
+  """简历名称"""
+  name: String
+
+  """所属用户 ID"""
+  user_id: Int!
+
+  """工资期望最小值"""
+  salary_min: Int
+
+  """工资期望最大值"""
+  salary_max: Int
+
+  """省"""
+  province: String
+
+  """市"""
+  city: String
+
+  """区"""
+  region: String
+
+  """简历权限"""
+  permission: ResumePermisssion
+
+  """工作经验（年）"""
+  exp: Int
+
+  """创建时间"""
+  created_at: DateTime
+
+  """更新时间"""
+  updated_at: DateTime
+}
+
+"""简历权限"""
+enum ResumePermisssion {
+  PUBLIC
+  PRIVATE
+}
+
+type ApplyEntity {
+  """ID"""
+  id: Int!
+
+  """用户 ID"""
+  user_id: Int!
+
+  """职位 ID"""
+  position_id: Int!
+
+  """简历 ID"""
+  resume_id: Int!
+
+  """投递状态"""
+  state: ApplyState!
+
+  """创建时间"""
+  created_at: DateTime
+
+  """更新时间"""
+  updated_at: DateTime
+}
+
+"""投递状态"""
+enum ApplyState {
+  POST
+  REVISION
+  ACCEPT
+  REJECT
+}
+
 type Query {
   """获取数据库中的名字（demo 测试用）"""
   getName(
@@ -77,9 +197,18 @@ type Query {
     id: Int!
   ): String
 
+  """使用 ID 获取用户信息"""
+  getUserInfoById(userId: Int!): UserEntity!
+
   """使用 ID 获取公司信息"""
   getCompanyInfoById(companyId: Int!): CompanyEntity!
 
   """获取默认职位列表"""
   getDefaultPositions: PositionSearchData!
+
+  """使用 ID 获取公司信息"""
+  getResumeInfoById(resumeId: Int!): ResumeEntity!
+
+  """使用 ID 获取公司信息"""
+  getApplyInfoById(applyId: Int!): ApplyEntity!
 }
