@@ -12,7 +12,7 @@ export class PositionService {
         private readonly positionRepository: Repository<Position>
     ) { }
 
-    async getPositionTags(positionId: number) {
+    async getPositionTags(positionId: number): Promise<string[]> {
         let tags = [];
         let result = await this.positionTagService.getTagsById(positionId);
         for (let item of result) {
@@ -35,5 +35,11 @@ export class PositionService {
             result.push({ tags: tags, ...item });
         }
         return { list: result };
+    }
+
+    async getPositionById(positionId: number): Promise<PositionEntity> {
+        let result = await this.positionRepository.findOne({ id: positionId });
+        let tags = await this.getPositionTags(positionId);
+        return { tags: tags, ...result };
     }
 }

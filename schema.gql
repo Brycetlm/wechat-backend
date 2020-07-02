@@ -82,4 +82,7 @@ type Query {
 
   """获取默认职位列表"""
   getDefaultPositions: PositionSearchData!
+
+  """根据 ID 获取职位信息"""
+  getPositionById(positionId: Int!): PositionEntity!
 }
