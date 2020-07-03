@@ -223,6 +223,9 @@ type Mutation {
   """修改用户信息"""
   updateUserInfo(userInput: UserInfoUpdateInput!): Boolean!
 
+  """更新或插入简历信息"""
+  updateResumeInfo(resumeInput: ResumeInput!): Boolean!
+
   """插入申请记录"""
   insertApplyRecord(applyInput: ApplyInput!): Boolean!
 }
@@ -254,6 +257,38 @@ input UserInfoUpdateInput {
 
   """手机号"""
   phone: String
+}
+
+input ResumeInput {
+  """ID"""
+  id: Int
+
+  """简历名称"""
+  name: String
+
+  """所属用户 ID"""
+  user_id: Int!
+
+  """工资期望最小值"""
+  salary_min: Int
+
+  """工资期望最大值"""
+  salary_max: Int
+
+  """省"""
+  province: String
+
+  """市"""
+  city: String
+
+  """区"""
+  region: String
+
+  """简历权限"""
+  permission: ResumePermisssion
+
+  """工作经验（年）"""
+  exp: Int
 }
 
 input ApplyInput {
