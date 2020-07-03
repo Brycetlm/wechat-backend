@@ -206,14 +206,11 @@ type Query {
   """获取默认职位列表"""
   getDefaultPositions: PositionSearchData!
 
-<<<<<<< HEAD
   """使用 ID 获取公司信息"""
   getResumeInfoById(resumeId: Int!): ResumeEntity!
 
   """使用 ID 获取公司信息"""
   getApplyInfoById(applyId: Int!): ApplyEntity!
-=======
   """根据 ID 获取职位信息"""
   getPositionById(positionId: Int!): PositionEntity!
->>>>>>> 89790ff1902e598f0b7461207808df89ea8aa7f7
 }
