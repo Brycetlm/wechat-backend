@@ -19,10 +19,10 @@ export class UserResolver {
     }
 
     //绑定用户openid
-    @Query(returns => UserEntity, { name: "bindOpenId", description: "绑定用户openid" })
+    @Query(returns => Number, { name: "bindOpenId", description: "绑定用户openid" })
     async bindOpenId(
         @Args({ name: 'openId', type: () => String, nullable: false }) openID: string
-    ): Promise<UserEntity> {
+    ): Promise<number> {
         return await this.userService.bindOpenId(openID);
     }
     

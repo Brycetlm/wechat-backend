@@ -23,11 +23,12 @@ export class UserService {
     }
     
     //绑定openid和uid
-    async bindOpenId(openId: string): Promise<UserEntity> {
+    async bindOpenId(openId: string): Promise<number> {
         //const rawData = await this.userRepository.query('SELECT openid FROM `user` where id=6;');
         if (await this.userRepository.findOne({ openid: openId })) {
             let user = await this.userRepository.findOne({ openid: openId });
-            return user; //返回根据openid找到的用户数据
+            var uid = user.id;
+            return uid; //返回根据openid找到的用户数据
         }
         else {
             const newUser = await this.userRepository.create();
@@ -47,7 +48,8 @@ export class UserService {
             newUser.province = "province";
             newUser.region = "region";
             await this.userRepository.insert(newUser);
-            return newUser;
+            var uid = newUser.id;
+            return uid;
 
         }
     }
