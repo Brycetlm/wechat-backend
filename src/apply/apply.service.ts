@@ -40,4 +40,10 @@ export class ApplyService {
             return false;
         }
     }
+
+    //获取申请信息
+    async getApplyInfoByUserId(userId: number): Promise<ApplyEntity[]> {
+
+        return await this.applyRepository.find({ user_id: userId });
+    }
 }

@@ -199,11 +199,6 @@ type Query {
     """数据库中的ID（测试用）"""
     id: Int!
   ): String
-
-  """使用 ID 获取公司信息"""
-  getApplyInfoById(applyId: Int!): ApplyEntity!
-
-  """绑定用户openid"""
   bindOpenId(openId: String!): Float!
 
   """使用 ID 获取用户信息"""
@@ -220,6 +215,12 @@ type Query {
 
   """使用 ID 获取公司信息"""
   getResumeInfoById(resumeId: Int!): ResumeEntity!
+
+  """使用 ID 获取公司信息"""
+  getApplyInfoById(applyId: Int!): ApplyEntity!
+
+  """使用 UserID 获取其所有申请信息"""
+  getApplyInfoByUserId(userId: Int!): [ApplyEntity!]!
 }
 
 type Mutation {

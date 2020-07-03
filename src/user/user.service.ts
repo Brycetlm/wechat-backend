@@ -16,11 +16,7 @@ export class UserService {
         return await this.userRepository.findOne({ id: userId });
     }
 
-    //获取申请信息
-    async getApplyInfoById(userId: number): Promise<any> {
-
-        return await this.userRepository.find({ id: userId });
-    }
+    
     
     //绑定openid和uid
     async bindOpenId(openId: string): Promise<number> {

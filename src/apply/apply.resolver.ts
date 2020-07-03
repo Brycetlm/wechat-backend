@@ -30,4 +30,12 @@ export class ApplyResolver {
     ): Promise<Boolean> {
         return await this.applyService.deleteApply(applyId);
     }
+
+    //获取申请信息
+    @Query(returns => [ApplyEntity], { name: "getApplyInfoByUserId", description: "使用 UserID 获取其所有申请信息" })
+    async getApplyInfoByUserId(
+        @Args({ name: 'userId', type: () => Int, nullable: false }) userId: number
+    ): Promise<ApplyEntity[]> {
+        return await this.applyService.getApplyInfoByUserId(userId);
+    }
 }
