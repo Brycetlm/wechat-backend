@@ -222,6 +222,9 @@ type Query {
 type Mutation {
   """修改用户信息"""
   updateUserInfo(userInput: UserInfoUpdateInput!): Boolean!
+
+  """插入申请记录"""
+  insertApplyRecord(applyInput: ApplyInput!): Boolean!
 }
 
 input UserInfoUpdateInput {
@@ -251,4 +254,15 @@ input UserInfoUpdateInput {
 
   """手机号"""
   phone: String
+}
+
+input ApplyInput {
+  """用户 ID"""
+  user_id: Int!
+
+  """职位 ID"""
+  position_id: Int!
+
+  """简历 ID"""
+  resume_id: Int!
 }
