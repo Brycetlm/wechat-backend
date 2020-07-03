@@ -225,6 +225,7 @@ type Mutation {
 
   """修改用户头像url"""
   updateAvatar(userInput: UserInfoUpdateInput!, url: String!): Boolean!
+
   """更新或插入简历信息，输入中不含 ID 或者查无此 ID 时新建记录，否则修改已有记录"""
   updateResumeInfo(resumeInput: ResumeInput!): Boolean!
 

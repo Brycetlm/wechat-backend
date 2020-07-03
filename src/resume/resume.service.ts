@@ -26,7 +26,7 @@ export class ResumeService {
             const now = new Date();
             try {
                 await this.resumeRepository.insert({
-                    id: id,
+                    id: id + 1,
                     created_at: now,
                     updated_at: now,
                     is_deleted: false,

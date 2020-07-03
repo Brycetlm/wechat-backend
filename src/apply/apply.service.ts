@@ -19,7 +19,7 @@ export class ApplyService {
         const id = await this.applyRepository.count();
         const now = new Date();
         await this.applyRepository.insert({
-            id: id,
+            id: id + 1,
             position_id: record.position_id,
             resume_id: record.resume_id,
             user_id: record.user_id,
