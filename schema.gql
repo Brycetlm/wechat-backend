@@ -204,7 +204,7 @@ type Query {
   getApplyInfoById(applyId: Int!): ApplyEntity!
 
   """绑定用户openid"""
-  bindOpenId(openId: String!): UserEntity!
+  bindOpenId(openId: String!): Float!
 
   """使用 ID 获取用户信息"""
   getUserInfoById(userId: Int!): UserEntity!
