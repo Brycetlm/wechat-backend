@@ -7,7 +7,11 @@ import { Favorite, FavoriteEntity } from './favorite.entity';
 export class FavoriteService {
     constructor(
         @InjectRepository(Favorite)
-        private readonly FavoriteRepository: Repository<Favorite>
+        private readonly favoriteRepository: Repository<Favorite>
     ) { }
     
+    async getFavoriteByUser(userId: number) {
+        return await this.favoriteRepository.find({ user_id: userId });
+    }
+
 }

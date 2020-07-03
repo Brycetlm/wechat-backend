@@ -196,6 +196,23 @@ enum ApplyState {
   REJECT
 }
 
+type FavoriteEntity {
+  """收藏记录 ID"""
+  id: Int!
+
+  """用户的 ID"""
+  user_id: Int!
+
+  """职位的 ID"""
+  position_id: Int!
+
+  """创建时间"""
+  created_at: DateTime!
+
+  """修改时间"""
+  updated_at: DateTime!
+}
+
 type Query {
   """获取数据库中的名字（demo 测试用）"""
   getName(
@@ -226,6 +243,9 @@ type Query {
 
   """使用用户 ID 获取该用户的简历信息"""
   getResumeInfoByUser(userId: Int!): [ResumeEntity!]!
+
+  """使用用户 ID 获取该用户的收藏信息"""
+  getFavoriteInfoByUser(userId: Int!): [FavoriteEntity!]!
 }
 
 type Mutation {
