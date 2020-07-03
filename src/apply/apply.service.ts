@@ -25,8 +25,19 @@ export class ApplyService {
             user_id: record.user_id,
             state: ApplyState.POST,
             created_at: now,
-            updated_at: now
+            updated_at: now,
+            is_deleted: false
         });
         return true;
+    }
+
+    async deleteApply(applyId: number): Promise<Boolean> {
+        const apply = await this.applyRepository.findOne({ id: applyId });
+        if (apply && apply.state === ApplyState.POST) {
+            await this.applyRepository.update({ id: applyId }, { is_deleted: true });
+            return true;
+        } else {
+            return false;
+        }
     }
 }

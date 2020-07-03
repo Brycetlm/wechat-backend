@@ -231,6 +231,9 @@ type Mutation {
 
   """插入申请记录"""
   insertApplyRecord(applyInput: ApplyInput!): Boolean!
+
+  """删除（撤回）申请记录"""
+  deleteApply(applyId: Int!): Boolean!
 }
 
 input UserInfoUpdateInput {

@@ -23,4 +23,11 @@ export class ApplyResolver {
     ): Promise<Boolean> {
         return await this.applyService.insertApplyRecord(applyInput);
     }
+
+    @Mutation(returns => Boolean, { name: "deleteApply", description: "删除（撤回）申请记录" })
+    async deleteApply(
+        @Args({ name: 'applyId', type: () => Int, nullable: false }) applyId: number
+    ): Promise<Boolean> {
+        return await this.applyService.deleteApply(applyId);
+    }
 }
