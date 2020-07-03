@@ -200,6 +200,12 @@ type Query {
     id: Int!
   ): String
 
+  """使用 ID 获取公司信息"""
+  getApplyInfoById(applyId: Int!): ApplyEntity!
+
+  """绑定用户openid"""
+  bindOpenId(openId: String!): UserEntity!
+
   """使用 ID 获取用户信息"""
   getUserInfoById(userId: Int!): UserEntity!
 
@@ -214,9 +220,6 @@ type Query {
 
   """使用 ID 获取公司信息"""
   getResumeInfoById(resumeId: Int!): ResumeEntity!
-
-  """使用 ID 获取公司信息"""
-  getApplyInfoById(applyId: Int!): ApplyEntity!
 }
 
 type Mutation {
@@ -225,6 +228,7 @@ type Mutation {
 
   """修改用户头像url"""
   updateAvatar(userInput: UserInfoUpdateInput!, url: String!): Boolean!
+
   """更新或插入简历信息，输入中不含 ID 或者查无此 ID 时新建记录，否则修改已有记录"""
   updateResumeInfo(resumeInput: ResumeInput!): Boolean!
 
