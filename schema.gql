@@ -71,6 +71,9 @@ type CompanyEntity {
   """区"""
   region: String
 
+  """法人姓名"""
+  corporate: String
+
   """注册资本"""
   assets: String
 
@@ -206,11 +209,46 @@ type Query {
   """获取默认职位列表"""
   getDefaultPositions: PositionSearchData!
 
+  """根据 ID 获取职位信息"""
+  getPositionById(positionId: Int!): PositionEntity!
+
   """使用 ID 获取公司信息"""
   getResumeInfoById(resumeId: Int!): ResumeEntity!
 
   """使用 ID 获取公司信息"""
   getApplyInfoById(applyId: Int!): ApplyEntity!
-  """根据 ID 获取职位信息"""
-  getPositionById(positionId: Int!): PositionEntity!
+}
+
+type Mutation {
+  """修改用户信息"""
+  updateUserInfo(userInput: UserInfoUpdateInput!): Boolean!
+}
+
+input UserInfoUpdateInput {
+  """用户的 ID"""
+  id: Int!
+
+  """姓名"""
+  name: String
+
+  """生日"""
+  birthday: DateTime
+
+  """学历"""
+  education: Education
+
+  """省"""
+  province: String
+
+  """市"""
+  city: String
+
+  """区"""
+  region: String
+
+  """电子邮箱"""
+  email: String
+
+  """手机号"""
+  phone: String
 }

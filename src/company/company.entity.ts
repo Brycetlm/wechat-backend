@@ -21,6 +21,9 @@ export class CompanyEntity {
     @Field(type => String, { nullable: true, description: "区" })
     region: string;
 
+    @Field(type => String, { nullable: true, description: "法人姓名" })
+    corporate: string;
+
     @Field(type => String, { nullable: true, description: "注册资本" })
     assets: string;
 
