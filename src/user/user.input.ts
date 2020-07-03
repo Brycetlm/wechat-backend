@@ -9,6 +9,9 @@ export class UserInfoUpdateInput {
     @Field(type => String, { nullable: true, description: "姓名" })
     name: string;
 
+    @Field(type => String, { nullable: false, description: "用户性别" })
+    gender: string;
+
     @Field(type => Date, { nullable: true, description: "生日" })
     birthday: Date;
 

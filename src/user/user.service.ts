@@ -65,6 +65,7 @@ export class UserService {
             id: userInput.id
         }, {
             name: userInput.name,
+            gender: userInput.gender,
             birthday: userInput.birthday,
             education: userInput.education,
             province: userInput.province,

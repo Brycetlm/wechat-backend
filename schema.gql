@@ -6,6 +6,9 @@ type UserEntity {
   """用户的 ID"""
   id: Int!
 
+  """用户性别"""
+  gender: String!
+
   """微信平台提供的 openid"""
   openid: String!
 
@@ -251,6 +254,9 @@ input UserInfoUpdateInput {
 
   """姓名"""
   name: String
+
+  """用户性别"""
+  gender: String!
 
   """生日"""
   birthday: DateTime

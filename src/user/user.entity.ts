@@ -23,6 +23,10 @@ export class UserEntity {
     id: number;
 
     @Column()
+    @Field(type => String, { nullable: false, description: "用户性别" })
+    gender: string;
+
+    @Column()
     @Field(type => String, { nullable: false, description: "微信平台提供的 openid" })
     openid: string;
 
@@ -68,6 +72,11 @@ export class User {
     @PrimaryGeneratedColumn()
     @Field(type => Int, { nullable: false, description: "用户的 ID" })
     id: number;
+
+
+    @Column()
+    @Field(type => String, { nullable: false, description: "用户性别" })
+    gender: string;
 
     @Column()
     @Field(type => String, { nullable: false, description: "微信平台提供的 openid" })
