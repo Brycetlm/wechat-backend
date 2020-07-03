@@ -212,8 +212,11 @@ type Query {
   """根据 ID 获取职位信息"""
   getPositionById(positionId: Int!): PositionEntity!
 
-  """使用 ID 获取公司信息"""
+  """使用 ID 获取简历信息"""
   getResumeInfoById(resumeId: Int!): ResumeEntity!
+
+  """使用用户 ID 获取该用户的简历信息"""
+  getResumeInfoByUser(userId: Int!): [ResumeEntity!]!
 
   """使用 ID 获取公司信息"""
   getApplyInfoById(applyId: Int!): ApplyEntity!

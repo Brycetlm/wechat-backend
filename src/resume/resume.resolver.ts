@@ -10,11 +10,18 @@ export class ResumeResolver {
         private resumeService: ResumeService
     ) { }
 
-    @Query(returns => ResumeEntity, { name: "getResumeInfoById", description: "使用 ID 获取公司信息" })
-    async getCompanyInfoById(
+    @Query(returns => ResumeEntity, { name: "getResumeInfoById", description: "使用 ID 获取简历信息" })
+    async getResumeInfoById(
         @Args({ name: 'resumeId' , type: () => Int, nullable: false }) resumeId: number
     ): Promise<ResumeEntity> {
         return await this.resumeService.getResumeInfoById(resumeId);
+    }
+
+    @Query(returns => [ResumeEntity], { name: "getResumeInfoByUser", description: "使用用户 ID 获取该用户的简历信息" })
+    async getResumeInfoByUser(
+        @Args({ name: 'userId', type: () => Int, nullable: false }) userId: number
+    ): Promise<ResumeEntity[]> {
+        return await this.resumeService.getResumeInfoByUser(userId);
     }
 
     @Mutation(returns => Boolean, { name: 'updateResumeInfo', description: "更新或插入简历信息，输入中不含 ID 或者查无此 ID 时新建记录，否则修改已有记录" })

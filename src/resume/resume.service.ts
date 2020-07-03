@@ -15,6 +15,10 @@ export class ResumeService {
         return await this.resumeRepository.findOne({ id: resumeId });
     }
 
+    async getResumeInfoByUser(userId: number): Promise<ResumeEntity[]> {
+        return await this.resumeRepository.find({ user_id: userId });
+    }
+
     async updateResumeInfo(resumeInput: ResumeInput): Promise<Boolean> {
         if (resumeInput.id && await this.resumeRepository.findOne({ id: resumeInput.id })) {
             await this.resumeRepository.update({
