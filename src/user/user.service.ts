@@ -16,6 +16,43 @@ export class UserService {
         return await this.userRepository.findOne({ id: userId });
     }
 
+    //获取申请信息
+    async getApplyInfoById(userId: number): Promise<any> {
+
+        return await this.userRepository.find({ id: userId });
+    }
+    
+    //绑定openid和uid
+    async bindOpenId(openId: string): Promise<UserEntity> {
+        //const rawData = await this.userRepository.query('SELECT openid FROM `user` where id=6;');
+        if (await this.userRepository.findOne({ openid: openId })) {
+            let user = await this.userRepository.findOne({ openid: openId });
+            return user; //返回根据openid找到的用户数据
+        }
+        else {
+            const newUser = await this.userRepository.create();
+            const now = new Date();
+            newUser.openid = openId;
+
+            //default
+            //uid是自动增序添加的，在数据库中可以设置
+            newUser.birthday = now;
+            newUser.avatar_url = "url";
+            newUser.city = "city";
+            newUser.education = 1;
+            newUser.email = "email";
+            newUser.name = "name";
+            newUser.phone = "phone";
+            newUser.province = "province";
+            newUser.region = "region";
+            await this.userRepository.insert(newUser);
+            return newUser;
+
+        }
+    }
+
+
+
     async updateUserInfo(userInput: UserInfoUpdateInput): Promise<Boolean> {
         let user = await this.userRepository.findOne({ id: userInput.id });
         if (!user) {

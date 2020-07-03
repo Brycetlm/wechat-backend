@@ -10,6 +10,23 @@ export class UserResolver {
         private userService: UserService
     ) { }
 
+    //获取申请信息
+    @Query(returns => UserEntity, { name: "getApplyInfoById", description: "使用 ID 获取申请信息" })
+    async getApplyInfoById(
+        @Args({ name: 'userId', type: () => Int, nullable: false }) userId: number
+    ): Promise<any> {
+        return await this.userService.getUserInfoById(userId);
+    }
+
+    //绑定用户openid
+    @Query(returns => UserEntity, { name: "bindOpenId", description: "绑定用户openid" })
+    async bindOpenId(
+        @Args({ name: 'openId', type: () => String, nullable: false }) openID: string
+    ): Promise<UserEntity> {
+        return await this.userService.bindOpenId(openID);
+    }
+    
+
     @Query(returns => UserEntity, { name: "getUserInfoById", description: "使用 ID 获取用户信息" })
     async getUserInfoById(
         @Args({ name: 'userId', type: () => Int, nullable: false }) userId: number
