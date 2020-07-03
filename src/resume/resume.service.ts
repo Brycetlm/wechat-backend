@@ -29,12 +29,25 @@ export class ResumeService {
                     id: id,
                     created_at: now,
                     updated_at: now,
+                    is_deleted: false,
                     ...resumeInput
                 });
             } catch (error) {
                 console.log(error);
                 return false;
             }
+            return true;
+        }
+    }
+
+    async deleteResume(resumeId: number): Promise<Boolean> {
+        if (!await this.resumeRepository.findOne({ id: resumeId })) {
+            return false;
+        } else {
+            await this.resumeRepository.update({ id: resumeId }, { 
+                is_deleted: true,
+                updated_at: new Date()
+             });
             return true;
         }
     }

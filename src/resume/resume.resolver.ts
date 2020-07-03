@@ -23,4 +23,11 @@ export class ResumeResolver {
     ) {
         return await this.resumeService.updateResumeInfo(resumeInput);
     }
+
+    @Mutation(returns => Boolean, { name: 'deleteResumeInfo', description: "删除简历信息" })
+    async deleteResumeInfo(
+        @Args({ name: 'resumeId', type: () => Int, nullable: false }) resumeId: number
+    ) {
+        return await this.resumeService.deleteResume(resumeId);
+    }
 }
