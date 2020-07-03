@@ -222,6 +222,9 @@ type Query {
 type Mutation {
   """修改用户信息"""
   updateUserInfo(userInput: UserInfoUpdateInput!): Boolean!
+
+  """修改用户头像url"""
+  updateAvatar(userInput: UserInfoUpdateInput!, url: String!): Boolean!
 }
 
 input UserInfoUpdateInput {
@@ -251,4 +254,7 @@ input UserInfoUpdateInput {
 
   """手机号"""
   phone: String
+
+  """头像 URL"""
+  avatar_url: String
 }

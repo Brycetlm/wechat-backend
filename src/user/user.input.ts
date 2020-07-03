@@ -29,4 +29,7 @@ export class UserInfoUpdateInput {
 
     @Field(type => String, { nullable: true, description: "手机号" })
     phone: string;
+
+    @Field(type => String, { nullable: true, description: "头像 URL" })
+    avatar_url: string;
 }

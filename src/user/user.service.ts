@@ -34,8 +34,26 @@ export class UserService {
             city: userInput.city,
             region: userInput.region,
             email: userInput.email,
-            phone: userInput.phone
+            phone: userInput.phone,
+            avatar_url: userInput.avatar_url
         })
+        return true;
+    }
+
+    async updateAvatar(url: string, userInput: UserInfoUpdateInput): Promise<Boolean> {
+        let user = await this.userRepository.findOne({id: userInput.id});
+        if (!user) {
+            return false;
+        } else {
+            userInput = { ...user, ...userInput };
+        }
+
+        this.userRepository.update({
+            id: userInput.id
+        }, {
+            avatar_url: url
+        })
+
         return true;
     }
 
