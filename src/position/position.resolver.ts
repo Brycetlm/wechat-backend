@@ -2,6 +2,7 @@ import { Query, Resolver, Args, Mutation } from '@nestjs/graphql';
 import { Int } from "type-graphql";
 import { PositionService } from "./position.service";
 import { PositionEntity, PositionSearchData } from './position.entity';
+import { PositionFilterInput } from './position.input';
 
 @Resolver('Position')
 export class PositionResolver {
@@ -25,6 +26,19 @@ export class PositionResolver {
         @Args({ name: 'positionId' , type: () => Int, nullable: false }) positionId: number
     ): Promise<PositionEntity> {
         return await this.positionService.getPositionById(positionId);
+    }
+
+    @Query(returns => PositionSearchData, {
+        name: 'searchFilteredPositions',
+        description: '根据搜索字符串和过滤器参数搜索职位'
+    }) 
+    async searchFilteredPositions(
+        @Args({ name: 'searchInput', type: () => String, nullable: true }) searchInput: string,
+        @Args({ name: 'filterInput', type: () => PositionFilterInput, nullable: true }) filterInput: PositionFilterInput,
+        @Args({ name: 'take', type: () => Int, nullable: true }) take: number,
+        @Args({ name: 'skip', type: () => Int, nullable: true }) skip: number 
+    ) {
+        return await this.positionService.searchFilteredPositions(searchInput, filterInput, take, skip);
     }
 
 }
