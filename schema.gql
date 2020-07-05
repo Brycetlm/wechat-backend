@@ -275,6 +275,25 @@ input PositionFilterInput {
 
   """职位标签"""
   tag: [String!]
+
+  """排序项"""
+  order_by: OrderItem
+
+  """排序顺序"""
+  order: Order
+}
+
+"""排序项"""
+enum OrderItem {
+  SALARY_MIN
+  SALARY_MAX
+  UPDATED_AT
+}
+
+"""排序顺序"""
+enum Order {
+  ASC
+  DESC
 }
 
 type Mutation {

@@ -1,4 +1,5 @@
 import { Field, ID, ObjectType, Int, registerEnumType, Float, InputType } from '@nestjs/graphql';
+import { Order, OrderItem } from '../common';
 
 @InputType()
 export class PositionFilterInput {
@@ -19,4 +20,10 @@ export class PositionFilterInput {
 
     @Field(type => [String], { nullable: true, description: "职位标签" })
     tag: string[];
+
+    @Field(type => OrderItem, { nullable: true, description: "排序项" })
+    order_by: OrderItem;
+
+    @Field(type => Order, { nullable: true, description: "排序顺序" })
+    order: Order;
 }
