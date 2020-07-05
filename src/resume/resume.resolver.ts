@@ -10,8 +10,8 @@ export class ResumeResolver {
         private resumeService: ResumeService
     ) { }
 
-    @Query(returns => ResumeEntity, { name: "getResumeInfoById", description: "使用 ID 获取公司信息" })
-    async getCompanyInfoById(
+    @Query(returns => ResumeEntity, { name: "getResumeInfoById", description: "使用 ID 获取简历信息" })
+    async getResumeInfoById(
         @Args({ name: 'resumeId' , type: () => Int, nullable: false }) resumeId: number
     ): Promise<ResumeEntity> {
         return await this.resumeService.getResumeInfoById(resumeId);

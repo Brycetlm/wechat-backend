@@ -23,6 +23,12 @@ export class PositionEntity {
     @Field(type => [String], { nullable: true, description: "tag 列表" })
     tags: string[];
 
+    @Field(type => Int, { nullable: true, description: "最小工资" })
+    salary_min: number;
+
+    @Field(type => Int, { nullable: true, description: "最大工资"})
+    salary_max: number;
+
     @Field(type => Date, { nullable: true, description: "创建时间" })
     created_at: Date;
 
@@ -61,6 +67,14 @@ export class Position {
     @Column()
     @Field(type => String, { nullable: true, description: "招聘条件" })
     condition: string;
+
+    @Column()
+    @Field(type => Int, { nullable: true, description: "最小工资" })
+    salary_min: number;
+
+    @Column()
+    @Field(type => Int, { nullable: true, description: "最大工资"})
+    salary_max: number;
 
     @Column()
     @Field(type => Date, { nullable: true, description: "创建时间" })

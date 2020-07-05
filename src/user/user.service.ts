@@ -36,6 +36,7 @@ export class UserService {
             newUser.birthday = now;
             newUser.avatar_url = "url";
             newUser.city = "city";
+            newUser.gender = "男";
             newUser.education = 1;
             newUser.email = "email";
             newUser.name = "name";
@@ -63,6 +64,7 @@ export class UserService {
             id: userInput.id
         }, {
             name: userInput.name,
+            gender: userInput.gender,
             birthday: userInput.birthday,
             education: userInput.education,
             province: userInput.province,

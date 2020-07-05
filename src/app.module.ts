@@ -9,6 +9,7 @@ import { PositionModule } from './position/position.module';
 import { PositionTagModule } from './position-tag/position-tag.module';
 import { ResumeModule } from './resume/resume.module';
 import { ApplyModule } from './apply/apply.module';
+import { FavoriteModule } from './favorite/favorite.module';
 import { GraphQLModule } from '@nestjs/graphql';
 
 @Module({
@@ -43,7 +44,8 @@ import { GraphQLModule } from '@nestjs/graphql';
     PositionModule,
     PositionTagModule,
     ResumeModule,
-    ApplyModule
+    ApplyModule,
+    FavoriteModule
   ],
   controllers: [AppController],
   providers: [AppService],

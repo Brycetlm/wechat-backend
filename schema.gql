@@ -6,6 +6,9 @@ type UserEntity {
   """用户的 ID"""
   id: Int!
 
+  """用户性别"""
+  gender: String!
+
   """微信平台提供的 openid"""
   openid: String!
 
@@ -105,6 +108,12 @@ type PositionEntity {
 
   """tag 列表"""
   tags: [String!]
+
+  """最小工资"""
+  salary_min: Int
+
+  """最大工资"""
+  salary_max: Int
 
   """创建时间"""
   created_at: DateTime
@@ -213,6 +222,11 @@ type FavoriteEntity {
   is_deleted: Boolean!
 }
 
+type FavoriteSearchData {
+  """返回的收藏实体列表"""
+  list: [FavoriteEntity!]
+}
+
 type Query {
   """获取数据库中的名字（demo 测试用）"""
   getName(
@@ -233,7 +247,10 @@ type Query {
   """根据 ID 获取职位信息"""
   getPositionById(positionId: Int!): PositionEntity!
 
-  """使用 ID 获取公司信息"""
+  """根据搜索字符串和过滤器参数搜索职位"""
+  searchFilteredPositions(skip: Int, take: Int, filterInput: PositionFilterInput, searchInput: String): PositionSearchData!
+
+  """使用 ID 获取简历信息"""
   getResumeInfoById(resumeId: Int!): ResumeEntity!
 
   """使用 UserID 获取其所有简历信息"""
@@ -244,6 +261,54 @@ type Query {
 
   """使用 UserID 获取其所有申请信息"""
   getApplyInfoByUserId(userId: Int!): [ApplyEntity!]!
+
+  """使用用户 ID 获取该用户的收藏信息"""
+  getFavoriteInfoByUser(userId: Int!): FavoriteSearchData!
+
+  """使用用户 ID 获取该用户的收藏信息&不包含删除的"""
+  getFavorDel(userId: Int!): FavoriteSearchData!
+
+  """使用职位招聘 ID、用户 ID判断是否收藏"""
+  checkFavoriteInfoByPos(userId: Int!, PositionId: Int!): [FavoriteEntity!]!
+}
+
+input PositionFilterInput {
+  """最小期望工资"""
+  salary_min: Int
+
+  """最大期望工资"""
+  salary_max: Int
+
+  """省"""
+  province: String
+
+  """市"""
+  city: String
+
+  """区"""
+  region: String
+
+  """职位标签"""
+  tag: [String!]
+
+  """排序项"""
+  order_by: OrderItem
+
+  """排序顺序"""
+  order: Order
+}
+
+"""排序项"""
+enum OrderItem {
+  SALARY_MIN
+  SALARY_MAX
+  UPDATED_AT
+}
+
+"""排序顺序"""
+enum Order {
+  ASC
+  DESC
 }
 
 type Mutation {
@@ -264,6 +329,12 @@ type Mutation {
 
   """删除（撤回）申请记录"""
   deleteApply(applyId: Int!): Boolean!
+
+  """插入收藏记录"""
+  insertFavoriteRecord(favoriteInput: FavoriteInput!): Boolean!
+
+  """删除（撤回）收藏记录"""
+  deleteFavor(userId: Int!, positionId: Int!): Boolean!
 }
 
 input UserInfoUpdateInput {
@@ -272,6 +343,9 @@ input UserInfoUpdateInput {
 
   """姓名"""
   name: String
+
+  """用户性别"""
+  gender: String!
 
   """生日"""
   birthday: DateTime
@@ -339,4 +413,12 @@ input ApplyInput {
 
   """简历 ID"""
   resume_id: Int!
+}
+
+input FavoriteInput {
+  """用户 ID"""
+  user_id: Int!
+
+  """职位 ID"""
+  position_id: Int!
 }
