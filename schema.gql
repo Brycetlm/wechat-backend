@@ -193,6 +193,26 @@ enum ApplyState {
   REJECT
 }
 
+type FavoriteEntity {
+  """收藏记录 ID"""
+  id: Int!
+
+  """用户的 ID"""
+  user_id: Int!
+
+  """职位的 ID"""
+  position_id: Int!
+
+  """创建时间"""
+  created_at: DateTime!
+
+  """修改时间"""
+  updated_at: DateTime!
+
+  """是否删除"""
+  is_deleted: Boolean!
+}
+
 type Query {
   """获取数据库中的名字（demo 测试用）"""
   getName(

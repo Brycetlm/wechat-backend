@@ -16,17 +16,17 @@ export class ResumeService {
     }
 
     async updateResumeInfo(resumeInput: ResumeInput): Promise<Boolean> {
-        if (resumeInput.id && await this.resumeRepository.findOne({ id: resumeInput.id })) {
-            await this.resumeRepository.update({
-                id: resumeInput.id
-            }, resumeInput);
-            return true;
-        } else {
+        // if (resumeInput.id && await this.resumeRepository.findOne({ id: resumeInput.id })) {
+        //     await this.resumeRepository.update({
+        //         id: resumeInput.id
+        //     }, resumeInput);
+        //     return true;
+        // } else {
             const id = await this.resumeRepository.count();
             const now = new Date();
             try {
                 await this.resumeRepository.insert({
-                    id: id,
+                    
                     created_at: now,
                     updated_at: now,
                     is_deleted: false,
@@ -37,7 +37,7 @@ export class ResumeService {
                 return false;
             }
             return true;
-        }
+        //}
     }
 
     async deleteResume(resumeId: number): Promise<Boolean> {
@@ -53,7 +53,7 @@ export class ResumeService {
     }
 
 
-    //»ñÈ¡ÓÃ»§ËùÓÐ¼òÀúÐÅÏ¢
+    //ï¿½ï¿½È¡ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Ð¼ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
     async getResumeInfoByUserId(userId: number): Promise<ResumeEntity[]> {
 
         return await this.resumeRepository.find({ user_id: userId });
