@@ -109,6 +109,12 @@ type PositionEntity {
   """tag 列表"""
   tags: [String!]
 
+  """最小工资"""
+  salary_min: Int
+
+  """最大工资"""
+  salary_max: Int
+
   """创建时间"""
   created_at: DateTime
 
@@ -246,6 +252,9 @@ type Query {
   """根据 ID 获取职位信息"""
   getPositionById(positionId: Int!): PositionEntity!
 
+  """根据搜索字符串和过滤器参数搜索职位"""
+  searchFilteredPositions(skip: Int, take: Int, filterInput: PositionFilterInput, searchInput: String): PositionSearchData!
+
   """使用 ID 获取简历信息"""
   getResumeInfoById(resumeId: Int!): ResumeEntity!
 
@@ -260,6 +269,45 @@ type Query {
 
   """使用职位招聘 ID、用户 ID判断是否收藏"""
   checkFavoriteInfoByPos(userId: Int!, PositionId: Int!): [FavoriteEntity!]!
+}
+
+input PositionFilterInput {
+  """最小期望工资"""
+  salary_min: Int
+
+  """最大期望工资"""
+  salary_max: Int
+
+  """省"""
+  province: String
+
+  """市"""
+  city: String
+
+  """区"""
+  region: String
+
+  """职位标签"""
+  tag: [String!]
+
+  """排序项"""
+  order_by: OrderItem
+
+  """排序顺序"""
+  order: Order
+}
+
+"""排序项"""
+enum OrderItem {
+  SALARY_MIN
+  SALARY_MAX
+  UPDATED_AT
+}
+
+"""排序顺序"""
+enum Order {
+  ASC
+  DESC
 }
 
 type Mutation {
