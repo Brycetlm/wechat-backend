@@ -17,6 +17,15 @@ export class FavoriteEntity {
 
     @Field(type => Date, { nullable: false, description: "修改时间" })
     updated_at: Date;
+
+    @Field(type => Boolean, { nullable: false, description: "是否删除" })
+    is_deleted: boolean;
+}
+
+@ObjectType()
+export class FavoriteSearchData {
+    @Field(type => [FavoriteEntity], { nullable: true, description: "返回的收藏实体列表" })
+    list: FavoriteEntity[];
 }
 
 @Entity()

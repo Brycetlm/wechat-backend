@@ -211,6 +211,14 @@ type FavoriteEntity {
 
   """修改时间"""
   updated_at: DateTime!
+
+  """是否删除"""
+  is_deleted: Boolean!
+}
+
+type FavoriteSearchData {
+  """返回的收藏实体列表"""
+  list: [FavoriteEntity!]
 }
 
 type Query {
@@ -245,7 +253,13 @@ type Query {
   getResumeInfoByUser(userId: Int!): [ResumeEntity!]!
 
   """使用用户 ID 获取该用户的收藏信息"""
-  getFavoriteInfoByUser(userId: Int!): [FavoriteEntity!]!
+  getFavoriteInfoByUser(userId: Int!): FavoriteSearchData!
+
+  """使用用户 ID 获取该用户的收藏信息&不包含删除的"""
+  getFavorDel(userId: Int!): FavoriteSearchData!
+
+  """使用职位招聘 ID、用户 ID判断是否收藏"""
+  checkFavoriteInfoByPos(userId: Int!, PositionId: Int!): [FavoriteEntity!]!
 }
 
 type Mutation {
@@ -266,6 +280,12 @@ type Mutation {
 
   """删除（撤回）申请记录"""
   deleteApply(applyId: Int!): Boolean!
+
+  """插入收藏记录"""
+  insertFavoriteRecord(favoriteInput: FavoriteInput!): Boolean!
+
+  """删除（撤回）收藏记录"""
+  deleteFavor(favorId: Int!): Boolean!
 }
 
 input UserInfoUpdateInput {
@@ -344,4 +364,12 @@ input ApplyInput {
 
   """简历 ID"""
   resume_id: Int!
+}
+
+input FavoriteInput {
+  """用户 ID"""
+  user_id: Int!
+
+  """职位 ID"""
+  position_id: Int!
 }
