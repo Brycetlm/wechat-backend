@@ -44,9 +44,9 @@ export class FavoriteService {
         return true;
     }
 
-    async deleteFavor(favorId: number): Promise<Boolean> {
-        const favor = await this.favoriteRepository.findOne({ id: favorId });
-        await this.favoriteRepository.update({ position_id: favorId }, { is_deleted: true });
+    async deleteFavor(positionId: number, userId: number): Promise<Boolean> {
+        // const favor = await this.favoriteRepository.findOne({ id: favorId });
+        await this.favoriteRepository.update({ position_id: positionId, user_id:userId }, { is_deleted: true });
         return true;
     }
 

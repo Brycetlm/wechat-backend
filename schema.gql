@@ -333,7 +333,7 @@ type Mutation {
   insertFavoriteRecord(favoriteInput: FavoriteInput!): Boolean!
 
   """删除（撤回）收藏记录"""
-  deleteFavor(favorId: Int!): Boolean!
+  deleteFavor(userId: Int!, positionId: Int!): Boolean!
 }
 
 input UserInfoUpdateInput {

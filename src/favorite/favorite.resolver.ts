@@ -43,8 +43,9 @@ export class FavoriteResolver {
 
     @Mutation(returns => Boolean, { name: "deleteFavor", description: "删除（撤回）收藏记录" })
     async deleteApply(
-        @Args({ name: 'favorId', type: () => Int, nullable: false }) favorId: number
+        @Args({ name: 'positionId', type: () => Int, nullable: false }) positionId: number,
+        @Args({ name: 'userId', type: () => Int, nullable: false }) userId: number
     ): Promise<Boolean> {
-        return await this.favoriteService.deleteFavor(favorId);
+        return await this.favoriteService.deleteFavor(positionId, userId);
     }
 }
