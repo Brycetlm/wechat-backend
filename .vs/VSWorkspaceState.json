@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\company",
+    "\\src\\position",
+    "\\src\\resume",
+    "\\src\\user",
+    "\\test"
+  ],
+  "SelectedNode": "\\src\\user\\user.resolver.ts",
+  "PreviewInSolutionExplorer": false
+}
