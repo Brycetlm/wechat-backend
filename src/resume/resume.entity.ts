@@ -111,4 +111,8 @@ export class Resume {
     @Column()
     @Field(type => Date, { nullable: true, description: "更新时间" })
     updated_at: Date;
+
+    @Column()
+    @Field(type => Boolean, { nullable: true, description: "是否删除" })
+    is_deleted: boolean;
 }

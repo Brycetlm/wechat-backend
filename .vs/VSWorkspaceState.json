@@ -2,6 +2,7 @@
   "ExpandedNodes": [
     "",
     "\\src",
+<<<<<<< HEAD
     "\\src\\company",
     "\\src\\position",
     "\\src\\resume",
@@ -9,5 +10,12 @@
     "\\test"
   ],
   "SelectedNode": "\\src\\user\\user.resolver.ts",
+=======
+    "\\src\\apply",
+    "\\src\\resume",
+    "\\src\\user"
+  ],
+  "SelectedNode": "\\src\\user\\user.service.ts",
+>>>>>>> 4f8c9db8a14e5575ebd14c9372398ed71dfda6ee
   "PreviewInSolutionExplorer": false
 }
