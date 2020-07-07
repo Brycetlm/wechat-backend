@@ -51,6 +51,16 @@ export class PositionService {
         return { tags: tags, ...result };
     }
 
+    async getPositionByCompany(companyId: number): Promise<PositionEntity[]> {
+        let result = await this.positionRepository.find({ company_id: companyId })
+        console.log(result);
+        let resultEntity = [];
+        for (let item of result) {
+            resultEntity.push({ tags: null, ...item });
+        }
+        return resultEntity;
+    }
+
     async getWhere(searchInput: string, filterInput: PositionFilterInput, query: SelectQueryBuilder<Position>) {
         query = query.where("1 = 1");
         if (searchInput) {

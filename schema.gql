@@ -247,6 +247,9 @@ type Query {
   """根据 ID 获取职位信息"""
   getPositionById(positionId: Int!): PositionEntity!
 
+  """根据公司 ID 获取职位信息"""
+  getPositionByCompany(companyId: Int!): [PositionEntity!]!
+
   """根据搜索字符串和过滤器参数搜索职位"""
   searchFilteredPositions(skip: Int, take: Int, filterInput: PositionFilterInput, searchInput: String): PositionSearchData!
 
@@ -261,6 +264,9 @@ type Query {
 
   """使用 UserID 获取其所有申请信息"""
   getApplyInfoByUserId(userId: Int!): [ApplyEntity!]!
+
+  """使用公司 ID 获取其所有申请信息"""
+  getApplyByCompany(companyId: Int!): [ApplyEntity!]!
 
   """使用用户 ID 获取该用户的收藏信息"""
   getFavoriteInfoByUser(userId: Int!): FavoriteSearchData!

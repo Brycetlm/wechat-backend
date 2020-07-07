@@ -28,6 +28,16 @@ export class PositionResolver {
         return await this.positionService.getPositionById(positionId);
     }
 
+    @Query(returns => [PositionEntity], {
+        name: 'getPositionByCompany',
+        description: '根据公司 ID 获取职位信息'
+    }) 
+    async getPositionByCompany(
+        @Args({ name: 'companyId', type: () => Int, nullable: false }) companyId: number 
+    ): Promise<PositionEntity[]> {
+        return await this.positionService.getPositionByCompany(companyId);
+    }
+
     @Query(returns => PositionSearchData, {
         name: 'searchFilteredPositions',
         description: '根据搜索字符串和过滤器参数搜索职位'
