@@ -58,4 +58,8 @@ export class ApplyService {
         const result = await this.applyRepository.query(query.getSql());
         return result;
     }
+
+    async getApplyByResume(resumeId: number): Promise<ApplyEntity[]> {
+        return await this.applyRepository.find({ resume_id: resumeId });
+    }
 }
