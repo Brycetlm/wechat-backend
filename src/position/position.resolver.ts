@@ -28,6 +28,18 @@ export class PositionResolver {
         return await this.positionService.getPositionById(positionId);
     }
 
+
+    @Query(returns => Number, {
+        name: 'countPosition',
+        description: '根据 用户id 获取职位数量'
+    })
+    async countPosition(
+        @Args({ name: 'userId', type: () => Int, nullable: true }) userId: number
+    ): Promise<number> {
+        return await this.positionService.countPosition();
+    }
+
+
     @Query(returns => PositionSearchData, {
         name: 'searchFilteredPositions',
         description: '根据搜索字符串和过滤器参数搜索职位'

@@ -163,6 +163,9 @@ type ResumeEntity {
 
   """更新时间"""
   updated_at: DateTime
+
+  """是否删除"""
+  is_deleted: Boolean
 }
 
 """简历权限"""
@@ -246,6 +249,9 @@ type Query {
 
   """根据 ID 获取职位信息"""
   getPositionById(positionId: Int!): PositionEntity!
+
+  """根据 用户id 获取职位数量"""
+  countPosition(userId: Int): Float!
 
   """根据搜索字符串和过滤器参数搜索职位"""
   searchFilteredPositions(skip: Int, take: Int, filterInput: PositionFilterInput, searchInput: String): PositionSearchData!
