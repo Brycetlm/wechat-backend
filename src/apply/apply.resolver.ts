@@ -38,4 +38,18 @@ export class ApplyResolver {
     ): Promise<ApplyEntity[]> {
         return await this.applyService.getApplyInfoByUserId(userId);
     }
+
+    @Query(returns => [ApplyEntity], { name: "getApplyByCompany", description: "使用公司 ID 获取其所有申请信息" })
+    async getApplyByCompany(
+        @Args({ name: 'companyId', type: () => Int, nullable: false }) companyId: number
+    ): Promise<ApplyEntity[]> {
+        return await this.applyService.getApplyByCompany(companyId);
+    }
+
+    @Query(returns => [ApplyEntity], { name: "getApplyByResume", description: "使用简历 ID 获取其所有申请信息" })
+    async getApplyByResume(
+        @Args({ name: 'resumeId', type: () => Int, nullable: false }) resumeId: number
+    ): Promise<ApplyEntity[]> {
+        return await this.applyService.getApplyByResume(resumeId);
+    }
 }
