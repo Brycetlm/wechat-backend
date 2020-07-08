@@ -2,6 +2,7 @@ import { Query, Resolver, Args, Mutation } from '@nestjs/graphql';
 import { Int } from "type-graphql";
 import { CompanyService } from "./company.service";
 import { CompanyEntity } from './company.entity';
+import { CompanyInput } from './company.input';
 
 @Resolver('Company')
 export class CompanyResolver {
@@ -16,4 +17,17 @@ export class CompanyResolver {
         return await this.companyService.getCompanyInfoById(companyId);
     }
 
+    @Mutation(returns => Boolean, { name: 'updateCompanyInfo', description: "更新或插入信息，输入中不含 ID 或者查无此 ID 时新建记录，否则修改已有记录" })
+    async updateCompanyInfo(
+        @Args({ name: 'companyInput', type: () => CompanyInput, nullable: false }) companyInput: CompanyInput
+    ) {
+        return await this.companyService.updateCompanyInfo(companyInput);
+    }
+
+    @Mutation(returns => Boolean, { name: 'deleteCompanyById', description: "删除公司信息" })
+    async deleteCompanyById(
+        @Args({ name: 'companyId', type: () => Int, nullable: false }) companyId: number
+    ) {
+        return await this.companyService.deleteCompanyById(companyId);
+    }
 }
