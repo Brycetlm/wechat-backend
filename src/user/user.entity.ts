@@ -1,5 +1,6 @@
 import { PrimaryGeneratedColumn, Column, Entity } from "typeorm";
 import { Field, ID, ObjectType, Int, registerEnumType, Float } from '@nestjs/graphql';
+import { CommonAnalyzeItem } from '../common';
 
 export enum Education {
     MIDDLE_SCHOOL = 0,      // 初中
@@ -15,6 +16,18 @@ registerEnumType(Education, {
     name: 'Education',
     description: '学历'
 })
+
+@ObjectType()
+export class UserAnalyze {
+    @Field(type => [CommonAnalyzeItem], { nullable: false, description: "性别统计" })
+    gender: CommonAnalyzeItem[];
+
+    @Field(type => [CommonAnalyzeItem], { nullable: false, description: "学历统计" })
+    education: CommonAnalyzeItem[];
+
+    @Field(type => [CommonAnalyzeItem], { nullable: false, description: "地区统计" })
+    province: CommonAnalyzeItem[];
+}
 
 @ObjectType()
 export class UserEntity {

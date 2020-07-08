@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User, UserEntity } from './user.entity';
+import { User, UserEntity, UserAnalyze } from './user.entity';
 import { UserInfoUpdateInput } from './user.input';
+import { CommonAnalyzeItem } from 'src/common';
 
 @Injectable()
 export class UserService {
@@ -16,8 +17,8 @@ export class UserService {
         return await this.userRepository.findOne({ id: userId });
     }
 
-    
-    
+
+
     //绑定openid和uid
     async bindOpenId(openId: string): Promise<number> {
         //const rawData = await this.userRepository.query('SELECT openid FROM `user` where id=6;');
@@ -78,7 +79,7 @@ export class UserService {
     }
 
     async updateAvatar(url: string, userInput: UserInfoUpdateInput): Promise<Boolean> {
-        let user = await this.userRepository.findOne({id: userInput.id});
+        let user = await this.userRepository.findOne({ id: userInput.id });
         if (!user) {
             return false;
         } else {
@@ -94,4 +95,31 @@ export class UserService {
         return true;
     }
 
+    async getUserAnalyze() {
+        const gender = await this.userRepository.query("select distinct gender, count(*) c from user group by gender;");
+        const education = await this.userRepository.query("select distinct education, count(*) c from user group by education;");
+        const province = await this.userRepository.query("select distinct province, count(*) c from user group by province order by c desc;");
+        console.log(gender, education, province);
+        let genderResult: CommonAnalyzeItem[] = [];
+        let educationResult: CommonAnalyzeItem[] = [];
+        let provinceResult: CommonAnalyzeItem[] = [];
+        for (let item of gender) {
+            genderResult.push({ name: item.gender, value: item.c });
+        }
+        for (let item of education) {
+            educationResult.push({ name: item.education, value: item.c });
+        }
+        for (let item of province) {
+            provinceResult.push({ name: item.province, value: item.c });
+        }
+        return {
+            gender: genderResult,
+            education: educationResult,
+            province: provinceResult
+        };
+    }
+
+    async getAllUserInfo(): Promise<UserEntity[]> {
+        return await this.userRepository.find();
+    }
 }

@@ -3,6 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Apply, ApplyEntity, ApplyState } from './apply.entity';
 import { ApplyInput } from './apply.input';
+import { Position } from 'src/position/position.entity';
+import { Company } from 'src/company/company.entity';
 
 @Injectable()
 export class ApplyService {
@@ -41,9 +43,27 @@ export class ApplyService {
         }
     }
 
-    //»ñÈ¡ÓÃ»§ËùÓÐÉêÇëÐÅÏ¢
+    //ï¿½ï¿½È¡ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
     async getApplyInfoByUserId(userId: number): Promise<ApplyEntity[]> {
 
         return await this.applyRepository.find({ user_id: userId });
+    }
+
+    async getApplyByCompany(companyId: number): Promise<ApplyEntity[]> {
+        const query = this.applyRepository.createQueryBuilder("app")
+            .select(["app.id, app.user_id, app.position_id, app.resume_id, app.state, app.created_at, app.updated_at"])
+            .leftJoin(Position, "pos", "pos.id = app.position_id")
+            .leftJoin(Company, "company", "pos.company_id = company.id")
+            .where("company.id = " + companyId);
+        const result = await this.applyRepository.query(query.getSql());
+        return result;
+    }
+
+    async getApplyByResume(resumeId: number): Promise<ApplyEntity[]> {
+        return await this.applyRepository.find({ resume_id: resumeId });
+    }
+
+    async getAllApplyInfo(): Promise<ApplyEntity[]> {
+        return await this.applyRepository.find();
     }
 }

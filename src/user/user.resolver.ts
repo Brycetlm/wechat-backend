@@ -1,7 +1,7 @@
 import { Query, Resolver, Args, Mutation } from '@nestjs/graphql';
 import { Int } from "type-graphql";
 import { UserService } from "./user.service";
-import { UserEntity } from './user.entity';
+import { UserEntity, UserAnalyze } from './user.entity';
 import { UserInfoUpdateInput } from './user.input';
 
 @Resolver('User')
@@ -28,6 +28,11 @@ export class UserResolver {
         return await this.userService.getUserInfoById(userId);
     }
 
+    @Query(returns => UserAnalyze, { name: "getUserAnalyze", description: "获取用户统计信息" })
+    async getUserAnalyze(): Promise<UserAnalyze> {
+        return await this.userService.getUserAnalyze();
+    }
+
     @Mutation(returns => Boolean, { name: "updateUserInfo", description: "修改用户信息" })
     async updateUserInfo(
         @Args({ name: 'userInput', type: () => UserInfoUpdateInput, nullable: false }) userInput: UserInfoUpdateInput
@@ -41,5 +46,10 @@ export class UserResolver {
         @Args({ name: 'userInput', type: () => UserInfoUpdateInput, nullable: false }) userInput: UserInfoUpdateInput
     ): Promise<Boolean> {
         return await this.userService.updateAvatar(url, userInput);
+    }
+
+    @Query(returns => [UserEntity], { name: "getAllUserInfo", description: "查询所有用户信息" })
+    async getAllUserInfo(): Promise<UserEntity[]> {
+        return await this.userService.getAllUserInfo();
     }
 }

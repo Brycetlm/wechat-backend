@@ -1,4 +1,4 @@
-import { InputType, registerEnumType } from "@nestjs/graphql";
+import { InputType, registerEnumType, ObjectType, Field, Int } from "@nestjs/graphql";
 
 export enum Order {
     ASC = "ASC",
@@ -14,3 +14,12 @@ export enum OrderItem {
 }
 
 registerEnumType(OrderItem, { name: "OrderItem", description: "排序项" })
+
+@ObjectType()
+export class CommonAnalyzeItem {
+    @Field(type => String, { nullable: false, description: "字段名" })
+    name: string;
+
+    @Field(type => Int, { nullable: false, description: '字段值' })
+    value: number;
+}
