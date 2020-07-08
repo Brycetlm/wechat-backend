@@ -17,8 +17,8 @@ export class UserService {
         return await this.userRepository.findOne({ id: userId });
     }
 
-    
-    
+
+
     //绑定openid和uid
     async bindOpenId(openId: string): Promise<number> {
         //const rawData = await this.userRepository.query('SELECT openid FROM `user` where id=6;');
@@ -79,7 +79,7 @@ export class UserService {
     }
 
     async updateAvatar(url: string, userInput: UserInfoUpdateInput): Promise<Boolean> {
-        let user = await this.userRepository.findOne({id: userInput.id});
+        let user = await this.userRepository.findOne({ id: userInput.id });
         if (!user) {
             return false;
         } else {
@@ -119,4 +119,7 @@ export class UserService {
         };
     }
 
+    async getAllUserInfo(): Promise<UserEntity[]> {
+        return await this.userRepository.find();
+    }
 }

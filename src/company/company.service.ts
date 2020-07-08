@@ -29,7 +29,7 @@ export class CompanyService {
         const id = await this.companyRepository.count();
         try {
             await this.companyRepository.insert({
-                id: id,
+                id: id + 1,
                 ...companyInput
             });
         } catch (error) {
@@ -37,5 +37,9 @@ export class CompanyService {
             return false;
         }
         return true;
+    }
+
+    async getAllCompanyInfo(): Promise<CompanyEntity[]> {
+        return await this.companyRepository.find();
     }
 }

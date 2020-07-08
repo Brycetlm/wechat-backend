@@ -3,6 +3,7 @@ import { Int } from "type-graphql";
 import { ResumeService } from "./resume.service";
 import { ResumeEntity } from "./resume.entity"
 import { ResumeInput } from './resume.input';
+import { query } from 'express';
 
 @Resolver('Resume')
 export class ResumeResolver {
@@ -12,7 +13,7 @@ export class ResumeResolver {
 
     @Query(returns => ResumeEntity, { name: "getResumeInfoById", description: "使用 ID 获取简历信息" })
     async getResumeInfoById(
-        @Args({ name: 'resumeId' , type: () => Int, nullable: false }) resumeId: number
+        @Args({ name: 'resumeId', type: () => Int, nullable: false }) resumeId: number
     ): Promise<ResumeEntity> {
         return await this.resumeService.getResumeInfoById(resumeId);
     }
@@ -39,4 +40,8 @@ export class ResumeResolver {
         return await this.resumeService.getResumeInfoByUserId(userId);
     }
 
+    @Query(returns => [ResumeEntity], { name: "getAllResumeInfo", description: "查询所有简历" })
+    async getAllResumeInfo(): Promise<ResumeEntity[]> {
+        return await this.resumeService.getAllResumeInfo();
+    }
 }

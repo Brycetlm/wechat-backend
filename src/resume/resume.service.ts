@@ -22,20 +22,20 @@ export class ResumeService {
         //     }, resumeInput);
         //     return true;
         // } else {
-            const id = await this.resumeRepository.count();
-            const now = new Date();
-            try {
-                await this.resumeRepository.insert({
-                    created_at: now,
-                    updated_at: now,
-                    is_deleted: false,
-                    ...resumeInput
-                });
-            } catch (error) {
-                console.log(error);
-                return false;
-            }
-            return true;
+        const id = await this.resumeRepository.count();
+        const now = new Date();
+        try {
+            await this.resumeRepository.insert({
+                created_at: now,
+                updated_at: now,
+                is_deleted: false,
+                ...resumeInput
+            });
+        } catch (error) {
+            console.log(error);
+            return false;
+        }
+        return true;
         //}
     }
 
@@ -43,10 +43,10 @@ export class ResumeService {
         if (!await this.resumeRepository.findOne({ id: resumeId })) {
             return false;
         } else {
-            await this.resumeRepository.update({ id: resumeId }, { 
+            await this.resumeRepository.update({ id: resumeId }, {
                 is_deleted: true,
                 updated_at: new Date()
-             });
+            });
             return true;
         }
     }
@@ -56,5 +56,9 @@ export class ResumeService {
     async getResumeInfoByUserId(userId: number): Promise<ResumeEntity[]> {
 
         return await this.resumeRepository.find({ user_id: userId });
+    }
+
+    async getAllResumeInfo(): Promise<ResumeEntity[]> {
+        return await this.resumeRepository.find();
     }
 }

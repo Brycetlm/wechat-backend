@@ -47,4 +47,9 @@ export class UserResolver {
     ): Promise<Boolean> {
         return await this.userService.updateAvatar(url, userInput);
     }
+
+    @Query(returns => [UserEntity], { name: "getAllUserInfo", description: "查询所有用户信息" })
+    async getAllUserInfo(): Promise<UserEntity[]> {
+        return await this.userService.getAllUserInfo();
+    }
 }

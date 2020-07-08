@@ -62,4 +62,8 @@ export class ApplyService {
     async getApplyByResume(resumeId: number): Promise<ApplyEntity[]> {
         return await this.applyRepository.find({ resume_id: resumeId });
     }
+
+    async getAllApplyInfo(): Promise<ApplyEntity[]> {
+        return await this.applyRepository.find();
+    }
 }
