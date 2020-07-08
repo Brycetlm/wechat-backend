@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User, UserEntity } from './user.entity';
+import { User, UserEntity, UserAnalyze } from './user.entity';
 import { UserInfoUpdateInput } from './user.input';
+import { CommonAnalyzeItem } from 'src/common';
 
 @Injectable()
 export class UserService {
@@ -92,6 +93,30 @@ export class UserService {
         })
 
         return true;
+    }
+
+    async getUserAnalyze() {
+        const gender = await this.userRepository.query("select distinct gender, count(*) from user group by gender;");
+        const education = await this.userRepository.query("select distinct education, count(*) from user group by education;");
+        const province = await this.userRepository.query("select distinct province, count(*) from user group by province;");
+        console.log(gender, education, province);
+        let genderResult: CommonAnalyzeItem[] = [];
+        let educationResult: CommonAnalyzeItem[] = [];
+        let provinceResult: CommonAnalyzeItem[] = [];
+        for (let item of gender) {
+            genderResult.push({ name: item.gender, value: item['count(*)'] });
+        }
+        for (let item of education) {
+            educationResult.push({ name: item.education, value: item['count(*)'] });
+        }
+        for (let item of province) {
+            provinceResult.push({ name: item.province, value: item['count(*)'] });
+        }
+        return {
+            gender: genderResult,
+            education: educationResult,
+            province: provinceResult
+        };
     }
 
 }

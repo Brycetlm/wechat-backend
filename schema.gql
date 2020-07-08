@@ -2,6 +2,25 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type CommonAnalyzeItem {
+  """字段名"""
+  name: String!
+
+  """字段值"""
+  value: Int!
+}
+
+type UserAnalyze {
+  """性别统计"""
+  gender: [CommonAnalyzeItem!]!
+
+  """学历统计"""
+  education: [CommonAnalyzeItem!]!
+
+  """地区统计"""
+  province: [CommonAnalyzeItem!]!
+}
+
 type UserEntity {
   """用户的 ID"""
   id: Int!
@@ -237,6 +256,9 @@ type Query {
 
   """使用 ID 获取用户信息"""
   getUserInfoById(userId: Int!): UserEntity!
+
+  """获取用户统计信息"""
+  getUserAnalyze: UserAnalyze!
 
   """使用 ID 获取公司信息"""
   getCompanyInfoById(companyId: Int!): CompanyEntity!
