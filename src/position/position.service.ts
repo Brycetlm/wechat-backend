@@ -61,6 +61,11 @@ export class PositionService {
         return resultEntity;
     }
 
+    async countPosition(): Promise<number> {
+        return await this.positionRepository.count();
+    }
+
+
     async getWhere(searchInput: string, filterInput: PositionFilterInput, query: SelectQueryBuilder<Position>) {
         query = query.where("1 = 1");
         if (searchInput) {
