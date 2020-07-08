@@ -96,21 +96,21 @@ export class UserService {
     }
 
     async getUserAnalyze() {
-        const gender = await this.userRepository.query("select distinct gender, count(*) from user group by gender;");
-        const education = await this.userRepository.query("select distinct education, count(*) from user group by education;");
-        const province = await this.userRepository.query("select distinct province, count(*) from user group by province;");
+        const gender = await this.userRepository.query("select distinct gender, count(*) c from user group by gender;");
+        const education = await this.userRepository.query("select distinct education, count(*) c from user group by education;");
+        const province = await this.userRepository.query("select distinct province, count(*) c from user group by province order by c desc;");
         console.log(gender, education, province);
         let genderResult: CommonAnalyzeItem[] = [];
         let educationResult: CommonAnalyzeItem[] = [];
         let provinceResult: CommonAnalyzeItem[] = [];
         for (let item of gender) {
-            genderResult.push({ name: item.gender, value: item['count(*)'] });
+            genderResult.push({ name: item.gender, value: item.c });
         }
         for (let item of education) {
-            educationResult.push({ name: item.education, value: item['count(*)'] });
+            educationResult.push({ name: item.education, value: item.c });
         }
         for (let item of province) {
-            provinceResult.push({ name: item.province, value: item['count(*)'] });
+            provinceResult.push({ name: item.province, value: item.c });
         }
         return {
             gender: genderResult,
