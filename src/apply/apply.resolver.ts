@@ -52,4 +52,9 @@ export class ApplyResolver {
     ): Promise<ApplyEntity[]> {
         return await this.applyService.getApplyByResume(resumeId);
     }
+
+    @Query(returns => [ApplyEntity], { name: 'getAllApplyInfo', description: "获取所有申请信息" })
+    async getAllApplyInfo(): Promise<ApplyEntity[]> {
+        return await this.applyService.getAllApplyInfo();
+    }
 }
