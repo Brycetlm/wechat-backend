@@ -195,6 +195,9 @@ type ApplyEntity {
 
   """更新时间"""
   updated_at: DateTime
+
+  """是否删除"""
+  is_deleted: Boolean
 }
 
 """投递状态"""
