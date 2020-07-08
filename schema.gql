@@ -302,6 +302,9 @@ type Query {
   """使用简历 ID 获取其所有申请信息"""
   getApplyByResume(resumeId: Int!): [ApplyEntity!]!
 
+  """获取所有申请信息"""
+  getAllApplyInfo: [ApplyEntity!]!
+
   """使用用户 ID 获取该用户的收藏信息"""
   getFavoriteInfoByUser(userId: Int!): FavoriteSearchData!
 
