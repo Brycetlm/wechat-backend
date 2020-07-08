@@ -260,8 +260,14 @@ type Query {
   """获取用户统计信息"""
   getUserAnalyze: UserAnalyze!
 
+  """查询所有用户信息"""
+  getAllUserInfo: [UserEntity!]!
+
   """使用 ID 获取公司信息"""
   getCompanyInfoById(companyId: Int!): CompanyEntity!
+
+  """获取所有公司信息"""
+  getAllCompanyInfo: [CompanyEntity!]!
 
   """获取默认职位列表"""
   getDefaultPositions: PositionSearchData!
@@ -280,6 +286,9 @@ type Query {
 
   """使用 UserID 获取其所有简历信息"""
   getResumeInfoByUserId(userId: Int!): [ResumeEntity!]!
+
+  """查询所有简历"""
+  getAllResumeInfo: [ResumeEntity!]!
 
   """使用 ID 获取公司信息"""
   getApplyInfoById(applyId: Int!): ApplyEntity!

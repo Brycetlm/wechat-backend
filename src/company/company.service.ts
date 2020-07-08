@@ -38,4 +38,8 @@ export class CompanyService {
         }
         return true;
     }
+
+    async getAllCompanyInfo(): Promise<CompanyEntity[]> {
+        return await this.companyRepository.find();
+    }
 }
