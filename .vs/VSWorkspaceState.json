@@ -4,8 +4,9 @@
     "\\src",
     "\\src\\apply",
     "\\src\\position",
-    "\\src\\resume"
+    "\\src\\resume",
+    "\\src\\user"
   ],
-  "SelectedNode": "\\src\\resume\\resume.entity.ts",
+  "SelectedNode": "\\src\\apply\\apply.service.ts",
   "PreviewInSolutionExplorer": false
 }
